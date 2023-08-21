@@ -24,7 +24,7 @@ fn print_nginx_uniq_config(cdn_values: CdnValues) {
     for edge_node in cdn_values.value {
         for ip_group in edge_node.properties.ip_address_groups {
             for ip in ip_group.ipv4_addresses {
-                ip_list.push(format!("{}/{}", ip.base_ip_address, ip.prefix_length));
+                ip_list.push(format!("{}/{};", ip.base_ip_address, ip.prefix_length));
             }
         }
     }
