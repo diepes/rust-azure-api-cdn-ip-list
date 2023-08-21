@@ -1,13 +1,10 @@
 /// Rust program to get Verizon Edgecast CDN IP's from Azure API
 /// Then print them in format for nginx real_ip module
-
 // use dotenv; // used in req_get_info.rs
-
 mod parse_cdn;
 use parse_cdn::*;
 mod req_get_info;
 use req_get_info::*;
-
 
 #[tokio::main]
 async fn main() {
@@ -41,4 +38,3 @@ fn print_nginx_uniq_config(cdn_values: CdnValues) {
 // Query api for edgenode ip's - https://learn.microsoft.com/en-us/rest/api/cdn/edge-nodes/list?tabs=HTTP
 // Authentication through auzure oauth token
 // https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
-

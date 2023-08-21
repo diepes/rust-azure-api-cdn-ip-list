@@ -1,9 +1,9 @@
 use reqwest; // web requests
              // use reqwest::header::{AUTHORIZATION, CONTENT_TYPE};
 
+use dotenv;
 use serde::{Deserialize, Serialize};
 use serde_json;
-use dotenv;
 
 use crate::parse_cdn::CdnValues;
 //use parse_cdn::CdnValues;
@@ -33,13 +33,13 @@ where
     s.parse::<i32>().map_err(serde::de::Error::custom)
 }
 
-
 pub async fn get_oauth_token() -> Result<String, Box<dyn std::error::Error>> {
     dotenv::dotenv().ok();
     let token_request = TokenRequest {
         grant_type: "client_credentials",
         client_id: &std::env::var("CLIENT_ID").expect(".env must contain CLIENT_ID for the app."), //App id "Verizon-cdn-whitelist-retrieval"
-        client_secret: &std::env::var("CLIENT_SECRET").expect(".env must contain CLIENT_SECRET for the app."),
+        client_secret: &std::env::var("CLIENT_SECRET")
+            .expect(".env must contain CLIENT_SECRET for the app."),
         resource: "https://management.azure.com/",
         //scope: "https://graph.microsoft.com/.default",
     };
@@ -47,7 +47,8 @@ pub async fn get_oauth_token() -> Result<String, Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
     let response = client
         .post(format!(
-            "https://login.microsoftonline.com/{}/oauth2/token", &std::env::var("TENANT_ID").expect(".env must contain TENNANT_ID for the app.")
+            "https://login.microsoftonline.com/{}/oauth2/token",
+            &std::env::var("TENANT_ID").expect(".env must contain TENNANT_ID for the app.")
         ))
         .header(
             reqwest::header::CONTENT_TYPE,
