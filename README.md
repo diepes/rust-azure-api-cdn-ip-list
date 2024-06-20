@@ -1,5 +1,8 @@
 # Retrieve info from Azure for Verizon CDN
 
+Log into Azure using the raw api ```https://login.microsoftonline.com/{}/oauth2/token\``` passing required headers to get Oauth token.
+Then retrieve CDNS ip's from ```"https://management.azure.com/providers/Microsoft.Cdn/edgenodes?api-version=2023-05-01"```
+
 ## Set login credentials in .env
 
 * Create App in Azure Id
@@ -13,7 +16,6 @@
       CLIENT_ID="4.......-....-....-....-...........5"
       # client secret / password for app/client id
       CLIENT_SECRET="F......................................D"
-
 
 ## High level flow
 
