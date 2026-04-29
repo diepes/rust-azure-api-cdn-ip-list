@@ -1,7 +1,7 @@
 use reqwest; // web requests
              // use reqwest::header::{AUTHORIZATION, CONTENT_TYPE};
 
-use dotenv;
+use dotenvy;
 use serde::{Deserialize, Serialize};
 use serde_json;
 
@@ -34,7 +34,7 @@ where
 }
 
 pub async fn get_oauth_token() -> Result<String, Box<dyn std::error::Error>> {
-    dotenv::dotenv().ok();
+    dotenvy::dotenv().ok();
     let token_request = TokenRequest {
         grant_type: "client_credentials",
         client_id: &std::env::var("CLIENT_ID").expect(".env must contain CLIENT_ID for the app."), //App id "Verizon-cdn-whitelist-retrieval"
